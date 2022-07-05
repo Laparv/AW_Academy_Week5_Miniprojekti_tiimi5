@@ -8,12 +8,12 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
     public static class TrainApi
     {
-        const string url = "https://rata.digitraffic.fi/";
+        const string url = "https://rata.digitraffic.fi/api/";
 
 
-        public static async Task<List<Station>> GetSingleFruit()
+        public static async Task<List<Station>> GetStations()
         {
-            string urlParams = "api/v1/metadata/stations";
+            string urlParams = "v1/metadata/stations";
             
             var response = await ApiHelper.RunAsync<List<Station>>(url, urlParams);
 

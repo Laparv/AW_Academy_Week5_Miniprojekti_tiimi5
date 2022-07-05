@@ -26,13 +26,13 @@ namespace AzureFullStackDev_Week5__Miniprojekti
                 {
                     case '1':
                         Console.Clear();
-                        GetFruitInfo();
+                        GetStationInfo().GetAwaiter().GetResult();
 
-                        Console.WriteLine();
                         
 
                         //Console.WriteLine(TrainApi.GetSingleFruit().ToString());
                         //TrainApi.GetSingleFruit().ToString();
+                        Console.WriteLine("+++++++++++++++++++++++");
                         Console.ReadLine();
 
                         Console.WriteLine();
@@ -107,19 +107,19 @@ namespace AzureFullStackDev_Week5__Miniprojekti
   @-@-@-oo\");
         }
 
-        private static async Task GetFruitInfo()
+        private static async Task GetStationInfo()
         {
-            //Console.Write("\nGive name of the fruit: ");
-            //string input = Console.ReadLine();
+            List<Station> stationList = await TrainApi.GetStations();
 
-            List<Station> fruit = await TrainApi.GetSingleFruit();
-
-            foreach (var testiStation in fruit)
+            if (stationList == null)
+                Console.WriteLine("\n  Station not found :(");
+            else
             {
-                Console.WriteLine(testiStation.stationName);
+                foreach (var station in stationList)
+                {
+                    Console.WriteLine(station.stationName);
+                }
             }
-
-            //Console.WriteLine(fruit.stationName);
 
 
             //if (fruit == null)

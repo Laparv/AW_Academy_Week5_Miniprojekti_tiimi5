@@ -23,7 +23,7 @@ namespace APIHelpers
         {
             try
             {
-                using var client = GetHttpClient(url);
+                using (var client = GetHttpClient(url))
                 {
                     // send GET request
                     HttpResponseMessage response = await client.GetAsync(urlParams);
