@@ -19,7 +19,7 @@ namespace APIHelpers
             return client;
         }
 
-        public static async Task<List<T>> RunAsync<T>(string url, string urlParams)
+        public static async Task<T> RunAsync<T>(string url, string urlParams)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace APIHelpers
                         var json = await response.Content.ReadAsStringAsync();
 
                         // JSON to an object
-                        var result = JsonSerializer.Deserialize<List<T>>(json);
+                        var result = JsonSerializer.Deserialize<T>(json);
                         return result;
                     }
 
@@ -43,7 +43,7 @@ namespace APIHelpers
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                return default(List<T>);
+                return default(T);
             }
         }
     }
