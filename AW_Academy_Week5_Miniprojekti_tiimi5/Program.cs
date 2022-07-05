@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AW_Academy_Week5_Miniprojekti_tiimi5;
 
 namespace AzureFullStackDev_Week5__Miniprojekti
 {
@@ -23,6 +26,15 @@ namespace AzureFullStackDev_Week5__Miniprojekti
                 {
                     case '1':
                         Console.Clear();
+                        GetFruitInfo();
+
+                        Console.WriteLine();
+                        
+
+                        //Console.WriteLine(TrainApi.GetSingleFruit().ToString());
+                        //TrainApi.GetSingleFruit().ToString();
+                        Console.ReadLine();
+
                         Console.WriteLine();
                         break;
                     case '2':
@@ -93,6 +105,27 @@ namespace AzureFullStackDev_Week5__Miniprojekti
 |DD|____T_
 |_ |_____|<
   @-@-@-oo\");
+        }
+
+        private static async Task GetFruitInfo()
+        {
+            //Console.Write("\nGive name of the fruit: ");
+            //string input = Console.ReadLine();
+
+            List<Station> fruit = await TrainApi.GetSingleFruit();
+
+            foreach (var testiStation in fruit)
+            {
+                Console.WriteLine(testiStation.stationName);
+            }
+
+            //Console.WriteLine(fruit.stationName);
+
+
+            //if (fruit == null)
+            //    Console.WriteLine("\n  Fruit not found :(");
+            //else
+            //    PrintFruitData(fruit);
         }
     }
 
