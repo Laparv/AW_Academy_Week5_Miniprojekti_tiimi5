@@ -28,10 +28,6 @@ namespace AzureFullStackDev_Week5__Miniprojekti
                         Console.Clear();
                         GetStationInfo().GetAwaiter().GetResult();
 
-                        
-
-                        //Console.WriteLine(TrainApi.GetSingleFruit().ToString());
-                        //TrainApi.GetSingleFruit().ToString();
                         Console.WriteLine("+++++++++++++++++++++++");
                         Console.ReadLine();
 

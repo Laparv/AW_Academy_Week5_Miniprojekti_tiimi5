@@ -8,13 +8,14 @@ using System.Text.Json;
 
 namespace APIHelpers
 {
-    public static class ApiHelper
+    public static class ApiHelpers
     {
         // create HTTP client
         private static HttpClient GetHttpClient(string url)
         {
             var client = new HttpClient { BaseAddress = new Uri(url) };
             client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return client;
         }
