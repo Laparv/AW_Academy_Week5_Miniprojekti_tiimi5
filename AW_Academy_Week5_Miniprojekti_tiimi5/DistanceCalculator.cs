@@ -6,7 +6,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
     {
         public static double LatLonPointsDistance(double lat1, double lon1, double lat2, double lon2) //returns distance in kilometers
         {
-            double R = 6371e3f;
+            double R = 6371e3d;
             double fii1 = lat1 * Math.PI / 180;
             double fii2 = lat2 * Math.PI / 180;
             double deltaFii = (lat2 - lat1) * Math.PI / 180;
