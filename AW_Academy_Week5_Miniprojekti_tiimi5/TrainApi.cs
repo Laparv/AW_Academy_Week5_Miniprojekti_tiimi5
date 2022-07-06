@@ -18,7 +18,13 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             var response = await ApiHelper.RunAsync<Station[]>(url, urlParams);
             return response;
         }
+        public static async Task<LiveTrains[]> GetLiveTrains()
+        {
+            string urlParams = "live-trains";
 
+            var response = await ApiHelper.RunAsync<LiveTrains[]>(url, urlParams);
+            return response;
+        }
 
     }
 }

@@ -57,7 +57,10 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         break;
                     case '5':
                         Console.Clear();
-                        Console.WriteLine();
+                        LiveTrains[] LiveTrainsArray = await TrainApi.GetLiveTrains();
+                        LateTrains.TrainsArrivedLate(LiveTrainsArray);
+                        Console.WriteLine("\npress any key to exit");
+                        Console.ReadKey();
                         break;
                     case '6':
                         Console.Clear();
