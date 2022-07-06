@@ -75,7 +75,70 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public int thirdCategoryCodeId { get; set; }
     }
 
+
+    public class CompositionsRootobject
+    {
+        public int trainNumber { get; set; }
+        public string departureDate { get; set; }
+        public int operatorUICCode { get; set; }
+        public string operatorShortCode { get; set; }
+        public string trainCategory { get; set; }
+        public string trainType { get; set; }
+        public long version { get; set; }
+        public CompositionsJourneysection[] journeySections { get; set; }
     }
+
+    public class CompositionsJourneysection
+    {
+        public CompositionsBegintimetablerow beginTimeTableRow { get; set; }
+        public CompositionsEndtimetablerow endTimeTableRow { get; set; }
+        public CompositionsLocomotive[] locomotives { get; set; }
+        public CompositionsWagon[] wagons { get; set; }
+        public int totalLength { get; set; }
+        public int maximumSpeed { get; set; }
+        public int attapId { get; set; }
+        public int saapAttapId { get; set; }
+    }
+
+    public class CompositionsBegintimetablerow
+    {
+        public string stationShortCode { get; set; }
+        public int stationUICCode { get; set; }
+        public string countryCode { get; set; }
+        public string type { get; set; }
+        public DateTime scheduledTime { get; set; }
+    }
+
+    public class CompositionsEndtimetablerow
+    {
+        public string stationShortCode { get; set; }
+        public int stationUICCode { get; set; }
+        public string countryCode { get; set; }
+        public string type { get; set; }
+        public DateTime scheduledTime { get; set; }
+    }
+
+    public class CompositionsLocomotive
+    {
+        public int location { get; set; }
+        public string locomotiveType { get; set; }
+        public string powerType { get; set; }
+    }
+
+    public class CompositionsWagon
+    {
+        public string wagonType { get; set; }
+        public int location { get; set; }
+        public int salesNumber { get; set; }
+        public int length { get; set; }
+        public bool playground { get; set; }
+        public bool disabled { get; set; }
+        public bool catering { get; set; }
+        public bool pet { get; set; }
+    }
+
+
+}
 
 
 
