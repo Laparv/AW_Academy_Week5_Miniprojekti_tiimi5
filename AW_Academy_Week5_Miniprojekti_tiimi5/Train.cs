@@ -1,5 +1,11 @@
 ﻿namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
+    public class StationList
+    {
+        public Station[] Property1 { get; set; }
+    }
+
+
     public class Station
     {
         public bool passengerTraffic { get; set; }
@@ -11,6 +17,8 @@
         public float longitude { get; set; }
         public float latitude { get; set; }
     }
+
+
 
 }
 

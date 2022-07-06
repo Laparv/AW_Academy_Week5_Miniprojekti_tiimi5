@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AW_Academy_Week5_Miniprojekti_tiimi5;
 
-namespace AzureFullStackDev_Week5__Miniprojekti
+namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             char choice = '0';
 
@@ -26,13 +26,23 @@ namespace AzureFullStackDev_Week5__Miniprojekti
                 {
                     case '1':
                         Console.Clear();
-                        GetStationInfo().GetAwaiter().GetResult();
-
                         
 
-                        //Console.WriteLine(TrainApi.GetSingleFruit().ToString());
-                        //TrainApi.GetSingleFruit().ToString();
-                        Console.WriteLine("+++++++++++++++++++++++");
+                        Station[] stationlist = await TrainApi.GetStations();
+
+                        int i = 0;
+                        foreach (Station station in stationlist)
+                        {
+                            i++;
+                            Console.WriteLine($"{i}. {station.stationName}");
+                        }
+
+
+                        Console.WriteLine("\npress any key to exit");
+                        Console.ReadKey(true);
+
+
+                        
                         Console.ReadLine();
 
                         Console.WriteLine();
@@ -107,26 +117,26 @@ namespace AzureFullStackDev_Week5__Miniprojekti
   @-@-@-oo\");
         }
 
-        private static async Task GetStationInfo()
-        {
-            List<Station> stationList = await TrainApi.GetStations();
+        //private static async Task GetStationInfo()
+        //{
+        //    //List<Station> stationList = await TrainApi.GetStations();
 
-            if (stationList == null)
-                Console.WriteLine("\n  Station not found :(");
-            else
-            {
-                foreach (var station in stationList)
-                {
-                    Console.WriteLine(station.stationName);
-                }
-            }
+        //    if (stationList == null)
+        //        Console.WriteLine("\n  Station not found :(");
+        //    else
+        //    {
+        //        foreach (var station in stationList)
+        //        {
+        //            Console.WriteLine(station.stationName);
+        //        }
+        //    }
+        //    //if (fruit == null)
+        //    //    Console.WriteLine("\n  Fruit not found :(");
+        //    //else
+        //    //    PrintFruitData(fruit);
+        //}
 
 
-            //if (fruit == null)
-            //    Console.WriteLine("\n  Fruit not found :(");
-            //else
-            //    PrintFruitData(fruit);
-        }
     }
 
 
