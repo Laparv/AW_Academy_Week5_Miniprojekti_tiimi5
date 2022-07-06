@@ -13,9 +13,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
         public static async Task<Station[]> GetStations()
         {
-            string urlParams = "v1/metadata/stations";
-            
-            var response = await ApiHelper.RunAsync<List<Station>>(url, urlParams);
+            string urlParams = "metadata/stations";
 
             var response = await ApiHelper.RunAsync<Station[]>(url, urlParams);
             return response;

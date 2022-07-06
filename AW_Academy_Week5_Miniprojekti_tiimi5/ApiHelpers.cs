@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
-    public static class ApiHelpers
+    public static class ApiHelper
     {
         // create HTTP client
         private static HttpClient GetHttpClient(string url)

@@ -39,13 +39,9 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
 
                         Console.WriteLine("\npress any key to exit");
-                        Console.ReadKey(true);
-
-
-                        
-                        Console.ReadLine();
-
+                        Console.ReadKey();
                         Console.WriteLine();
+
                         break;
                     case '2':
                         Console.Clear();
