@@ -76,7 +76,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
     }
 
 
-    public class CompositionsRootobject
+    public class CompositionsTrain
     {
         public int trainNumber { get; set; }
         public string departureDate { get; set; }
