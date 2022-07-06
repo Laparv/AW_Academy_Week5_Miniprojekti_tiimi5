@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
-    public static class ApiHelper
+    public static class ApiHelpers
     {
         // create HTTP client
         private static HttpClient GetHttpClient(string url)
@@ -21,6 +21,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             var client = new HttpClient(handler);
             client.BaseAddress = new Uri(url);
             client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.AcceptEncoding.TryParseAdd("gzip");
             return client;
