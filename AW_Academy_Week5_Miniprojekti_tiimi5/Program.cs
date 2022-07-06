@@ -26,17 +26,8 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                 {
                     case '1':
                         Console.Clear();
-                        
 
-                        Station[] stationlist = await TrainApi.GetStations();
-
-                        int i = 0;
-                        foreach (Station station in stationlist)
-                        {
-                            i++;
-                            Console.WriteLine($"{i}. {station.stationName}");
-                        }
-
+                        await GetScheduleInfo(); //Lasse
 
                         Console.WriteLine("\npress any key to exit");
                         Console.ReadKey();
@@ -45,6 +36,10 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         break;
                     case '2':
                         Console.Clear();
+
+                        Console.WriteLine("\npress any key to exit");
+                        Console.ReadKey();
+                        Console.WriteLine();
                         Console.WriteLine();
                         break;
                     case '3':
@@ -135,8 +130,33 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         //    //    PrintFruitData(fruit);
         //}
 
+        // metodi seuraavien junien hakemiseen asemalta asemalle - Lasse
+        private static async Task GetScheduleInfo()
+        {
+            Console.Write("\nGive departure station: ");
+            string departureFrom = Console.ReadLine();
+            Console.WriteLine("Where do you want to go?");
+            string arriveTo = Console.ReadLine();
+            string timeNow = DateTime.Now.ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'");
 
+            LiveTrains[] nextTrains = await TrainApi.CheckSoonTrains(departureFrom, arriveTo, timeNow);
+
+            foreach (LiveTrains train in nextTrains)
+            {
+                Console.WriteLine(train.trainNumber);
+            }
+            
+        }
     }
 
 
 }
+//asemien listaukseen koodi - Lasse
+/* Station[] stationlist = await TrainApi.GetStations();
+
+                        int i = 0;
+                        foreach (Station station in stationlist)
+                        {
+                            i++;
+                            Console.WriteLine($"{i}. {station.stationName}");
+                        }*/

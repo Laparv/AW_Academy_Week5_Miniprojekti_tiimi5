@@ -75,7 +75,8 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public int thirdCategoryCodeId { get; set; }
     }
 
+    }
 
-}
+
 
 
