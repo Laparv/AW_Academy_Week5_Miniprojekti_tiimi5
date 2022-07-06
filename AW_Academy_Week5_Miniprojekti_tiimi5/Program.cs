@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AW_Academy_Week5_Miniprojekti_tiimi5;
+using System.Linq;
 
 namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
@@ -130,20 +131,34 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         // metodi seuraavien junien hakemiseen asemalta asemalle - Lasse
         private static async Task GetScheduleInfo()
         {
-            Console.Write("\nGive departure station: ");
-            string departureFrom = Console.ReadLine();
-            Console.WriteLine("Where do you want to go?");
-            string arriveTo = Console.ReadLine();
-            string timeNow = DateTime.Now.ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'");
+            Console.Write("Give departure station: ");
+
+            string departureFrom = await GetStationCode();
+            Console.Write("Where do you want to go? ");
+            string arriveTo = await GetStationCode();
+            string timeNow = DateTime.Now.AddHours(-3).ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'");
 
             LiveTrains[] nextTrains = await TrainApi.CheckSoonTrains(departureFrom, arriveTo, timeNow);
-
+            
+            
             foreach (LiveTrains train in nextTrains)
             {
-                Console.WriteLine(train.trainNumber);
+                //yritys saada lähtöaika tulostumaan
+               // var departureTime = Convert.ToString(train.timeTableRows.Where(t => t.stationShortCode == departureFrom && t.type.ToString().ToUpper() == "DEPARTURE").Select(s => s.scheduledTime));
+                Console.WriteLine($"Train {train.trainNumber} leaves at departureTime");
             }
             
         }
+
+        private static async Task<string> GetStationCode()
+        {
+            string userInput = Console.ReadLine();
+            Station[] stationList = await TrainApi.GetStations();
+            var stationCode = stationList.Where(station => station.stationName.Contains(userInput)).FirstOrDefault();
+
+            return stationCode.stationShortCode;
+        }
+
     }
 
 
