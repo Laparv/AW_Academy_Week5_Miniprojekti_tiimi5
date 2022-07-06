@@ -19,6 +19,11 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             Console.WriteLine("Joista myöhässä oli " + percentageLate + "%");
         }
 
+        public static void TotalLocomotive()
+        {
+
+        }
+
         public static void LateLocomotive(IEnumerable<LiveTrains> lateTrains, CompositionsTrain[] compositions)
         {
             List<string> locoInfoList = new List<string>();
@@ -31,6 +36,12 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                 if (!String.IsNullOrWhiteSpace(locoString))
                     locoInfoList.Add(locoString);
             }
+
+            // Meidän täytyy muuttaa live-trains haku trains hauksi niin voidaan hakea tietyllä päivämäärällä junat 
+            // päivämäärä voidaan kysyä käyttäjältä ja samaa päivämäärää käytetään kun haetaan compositionssit
+            // jotta voidaan verrata mikä veturityyppi myöhästeli eniten pitää hakea kuinka monta lähtöä kyseisellä veturilla tehtiin nyt tehdyn metodin lisäksi
+            // kun verrataan montako lähtöä veturilla tehtiin ja montako verutin lähtöä myöhästyi saadaan jokaiselle veturille myöhästymisprosentti
+
 
             //var test = compositions.Join(lateTrains, comp => comp, train => train,
             //    (comp, train) => new { TrainNum = train.trainNumber, LocoType = comp.journeySections[0].locomotives[0].locomotiveType });
