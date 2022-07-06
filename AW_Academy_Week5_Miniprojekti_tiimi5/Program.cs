@@ -44,7 +44,9 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
                         break;
                     case '2':
-                        Console.Clear();
+
+                        SpeedAndLocation.Speed();
+
                         Console.WriteLine();
                         break;
                     case '3':

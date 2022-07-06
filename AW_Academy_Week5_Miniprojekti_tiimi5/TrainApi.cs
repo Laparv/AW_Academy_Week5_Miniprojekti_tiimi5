@@ -20,5 +20,29 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         }
 
 
+        // Speed, MS
+        public static async Task<SpeedAndStuff[]> GetSpeed()
+        {
+            string urlParams = "train-locations/latest";
+
+            var response = await ApiHelper.RunAsync<SpeedAndStuff[]>(url, urlParams);
+            return response;
+        }
+
+        public static async Task<SpeedRootobject[]> GetSpeedStationNumber()
+        {
+            string urlParams = "live-trains";
+
+            var response = await ApiHelper.RunAsync<SpeedRootobject[]>(url, urlParams);
+            return response;
+        }
+
+        public static async Task<Timetablerow[]> GetSpeedStationName()
+        {
+            string urlParams = "live-trains";
+
+            var response = await ApiHelper.RunAsync<Timetablerow[]>(url, urlParams);
+            return response;
+        }
     }
 }
