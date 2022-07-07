@@ -32,8 +32,6 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
                         Console.WriteLine("\npress any key to exit");
                         Console.ReadKey();
-                        Console.WriteLine();
-
                         break;
                     case '2':
                         Console.Clear();
@@ -131,26 +129,26 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         // metodi junien aikataulujen hakemiseen asemalta asemalle - Lasse
         private static async Task GetNextTrainsInfo()
         {
-            Console.Write("Where are you leaving from?: ");
+            Console.Write("Mistä lähdet?: ");
             string departureFrom = await GetStationCode();
-            Console.Write("Where do you want to go?: ");
+            Console.Write("Mihin menet?: ");
             string arriveTo = await GetStationCode();
 
             string departureStationName = await GetStationName(departureFrom);
             string arriveStationName = await GetStationName(arriveTo);
 
 
-            Console.WriteLine("1) Leave now. 2) Specify departure time");
+            Console.WriteLine("1) Lähde nyt 2) Anna lähtöaika");
             char choice = Console.ReadKey().KeyChar;
             switch (choice)
             {
                 case '1':
                     Console.Clear();
-                    string timeNow = DateTime.Now.AddHours(-3).ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'");
+                    string timeNow = DateTime.Now.AddHours(-3).ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'"); //antaa tämän hetken hakuehtoihin 
 
                     LiveTrains[] nextTrains = await TrainApi.CheckForTrains(departureFrom, arriveTo, timeNow);
 
-                    Console.WriteLine("The next five trains:");
+                    Console.WriteLine("Seuraavat junat:");
                     foreach (LiveTrains train in nextTrains)
                     {
                         var departureTime = train.timeTableRows
@@ -163,44 +161,66 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
                         if (train.trainCategory == "Commuter")
                         {
-                            Console.WriteLine($"{train.commuterLineID} leaves {departureStationName} at {departureTime.ToShortTimeString()} and arrives to destination at {arrivalTime.ToShortTimeString()}");
+                            Console.WriteLine($"{train.commuterLineID}-juna asemalta {departureStationName.Replace("asema","")}" +
+                                $"lähtee klo {departureTime.ToShortTimeString()} ja saapuu asemalle {arriveStationName.Replace("asema","")}" +
+                                $"klo {arrivalTime.ToShortTimeString()}");
                         }
                         else
                         {
-                            Console.WriteLine($"{train.trainType + train.trainNumber} leaves {departureStationName} at {departureTime.ToShortTimeString()} and arrives to destination at {arrivalTime.ToShortTimeString()}");
+                            Console.WriteLine($"{train.trainType + train.trainNumber} asemalta {departureStationName.Replace("asema","")}" +
+                                $"lähtee klo {departureTime.ToShortTimeString()} ja saapuu asemalle {arriveStationName.Replace("asema", "")}" +
+                                $"klo {arrivalTime.ToShortTimeString()}");
                         }
                     }
                     Console.ReadLine();
                     break;
                 case '2':
                     Console.Clear();
-                    Console.WriteLine("What date are you leaving? (d/m/yyyy): ");
-                    var departureDate = Convert.ToDateTime(Console.ReadLine()).ToString("yyyy-MM-dd'T'");
-                    Console.WriteLine("What time?(hh:mm):");
-                    string departureHourAndMinute = Convert.ToDateTime(Console.ReadLine()).AddHours(-3).ToString("HH':'mm':'ss.fff'Z'");
-                    string timeFuture = departureDate + departureHourAndMinute;
-
-
-                    LiveTrains[] futureTrains = await TrainApi.CheckForTrains(departureFrom, arriveTo, timeFuture);
-
-                    Console.WriteLine("The next five trains:");
-                    foreach (LiveTrains train in futureTrains)
+                    //kysyy käyttäjältä päivämäärän ja kellonajan
+                    while (true)
                     {
-                        var futureDepartureTime = train.timeTableRows
-                            .Where(t => t.stationShortCode == departureFrom && t.type == "DEPARTURE")
-                            .Select(s => s.scheduledTime.AddHours(3)).FirstOrDefault();
-                        
-                        if (train.trainCategory == "Commuter")
+                        Console.WriteLine("Minä päivänä lähdet? (d/m/yyyy): ");
+                        var departureDate = Convert.ToDateTime(Console.ReadLine()).ToString("yyyy-MM-dd'T'");
+                        Console.WriteLine("Mihin aikaan?(hh:mm):");
+                        string departureHourAndMinute = Convert.ToDateTime(Console.ReadLine()).AddHours(-3).ToString("HH':'mm':'ss.fff'Z'");
+                        string timeFuture = departureDate + departureHourAndMinute;
+                        LiveTrains[] futureTrains = await TrainApi.CheckForTrains(departureFrom, arriveTo, timeFuture);
+                        try
                         {
-                            Console.WriteLine($"{train.commuterLineID} leaves {departureStationName} at {futureDepartureTime.ToShortTimeString()}");
+                            Console.Clear();
+                            Console.WriteLine("Juna päivämääränä ja kellonaikana:");
+                            foreach (LiveTrains train in futureTrains)
+                            {
+                                var futureDepartureTime = train.timeTableRows
+                                    .Where(t => t.stationShortCode == departureFrom && t.type == "DEPARTURE")
+                                    .Select(s => s.scheduledTime.AddHours(3)).FirstOrDefault();
+                                var futureArrivalTime = train.timeTableRows
+                                    .Where(t => t.stationShortCode == arriveTo && t.type == "ARRIVAL")
+                                    .Select(s => s.scheduledTime.AddHours(3)).FirstOrDefault();
+
+                            if (train.trainCategory == "Commuter")
+                            {
+                                    Console.WriteLine($"{train.commuterLineID}-juna asemalta {departureStationName.Replace("asema", "")}" +
+                                        $"lähtee {futureDepartureTime.ToShortDateString()} klo {futureDepartureTime.ToShortTimeString()}" +
+                                        $" ja saapuu asemalle {arriveStationName.Replace("asema", "")}klo {futureArrivalTime.ToShortTimeString()}");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{train.trainType + train.trainNumber} asemalta {departureStationName.Replace("asema", "")}" +
+                                    $"lähtee {futureDepartureTime.ToShortDateString()} klo {futureDepartureTime.ToShortTimeString()} " +
+                                    $"ja saapuu asemalle {arriveStationName.Replace("asema", "")}klo {futureArrivalTime.ToShortTimeString()}");
+                            }
+
                         }
-                        else
-                        {
-                            Console.WriteLine($"{train.trainType + train.trainNumber} leaves{departureStationName} at {futureDepartureTime.ToShortTimeString()}");
-                        }
-                        
                     }
-                    Console.ReadLine();
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Väärä syöte. Yritäthän uudelleen.");
+                            continue;
+                    }
+                        Console.ReadLine();
+                        break;
+                    }
                     break;
                 default: break;
             }
@@ -211,11 +231,22 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         //Hakee aseman koodin käyttäjän inputin perusteella - Lasse
         private static async Task<string> GetStationCode()
         {
-            string userInput = Console.ReadLine();
-            Station[] stationList = await TrainApi.GetStations();
-            var stationCode = stationList.Where(station => station.stationName.Contains(userInput)).FirstOrDefault();
+            while (true)
+            {
 
-            return stationCode.stationShortCode;
+                string userInput = UpperCaseFirstLetter(Console.ReadLine());
+
+                Station[] stationList = await TrainApi.GetStations();
+                var stationCode = stationList.Where(station => station.stationName.Replace("asema","").Contains(userInput)).FirstOrDefault();
+
+                if (stationCode == null)
+                {
+                    Console.WriteLine("Emme löytäneet asemaa näillä tiedoilla. Yritä uudelleen.");
+                    continue;
+                }
+                return stationCode.stationShortCode;
+            }
+            
         }
 
         //Hakee aseman nimen koodin perusteella - Lasse
@@ -224,6 +255,14 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             Station[] stationList = await TrainApi.GetStations();
             var stationName = stationList.Where(station => station.stationShortCode.Equals(stationCode)).FirstOrDefault();
             return stationName.stationName;
+        }
+       //Muuttaa käyttäjän syötteen oikeaan muotoon, jotta voidaan hakea asemakoodia
+        private static string UpperCaseFirstLetter(string input)
+        {
+            char[] array = input.ToLower().ToCharArray();
+            array[0] = char.ToUpper(array[0]);
+            string fixedString = new string(array);
+            return fixedString;
         }
 
         }
