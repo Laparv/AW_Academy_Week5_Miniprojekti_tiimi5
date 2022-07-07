@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
@@ -6,6 +6,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
     {
         public Station[] Property1 { get; set; }
     }
+
     public class Station
     {
         public bool passengerTraffic { get; set; }
@@ -140,6 +141,46 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
 }
 
+
+
+
+    // Speed     |
+    //           |
+    // Miikka  \  /
+    //   S      \/
+    public class SpeedAndStuff
+    {
+        public int trainNumber { get; set; }
+        public int speed { get; set; }
+    }
+
+    public class RootobjectCompositions
+    {
+        public int trainNumber { get; set; }
+        public Journeysection[] journeySections { get; set; }
+    }
+
+    public class Journeysection
+    {
+        public Begintimetablerow beginTimeTableRow { get; set; }
+        public Endtimetablerow endTimeTableRow { get; set; }
+    }
+
+    public class Begintimetablerow
+    {
+        public string stationShortCode { get; set; }
+    }
+
+    public class Endtimetablerow
+    {
+        public string stationShortCode { get; set; }
+    }
+    // Miikka    /\
+    //   S      /  \
+    //           |
+    // Speed     |    
+
+}
 
 
 

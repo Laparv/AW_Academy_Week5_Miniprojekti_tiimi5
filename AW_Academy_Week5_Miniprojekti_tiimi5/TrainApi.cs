@@ -20,7 +20,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         }
         
         //checks next 5 trains
-        public static async Task<LiveTrains[]> CheckSoonTrains(string departure_station, string arrival_station, string startDate)
+        public static async Task<LiveTrains[]> CheckForTrains(string departure_station, string arrival_station, string startDate)
         {
             string urlParams = $"live-trains/station/{departure_station}/{arrival_station}?include_nonstopping=false&limit=5&startDate={startDate}";
 
@@ -37,6 +37,37 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         }
 
 
+
+        // Speed     |
+        //           |
+        // Miikka  \  /
+        //   S      \/
+        public static async Task<SpeedAndStuff[]> GetSpeed()
+        {
+            // Valitaan https://rata.digitraffic.fi/api/v1/train-locations/latest josta saa napattua junan numeron ja nopeuden
+            string urlParams = "train-locations/latest";
+
+            var response = await ApiHelper.RunAsync<SpeedAndStuff[]>(url, urlParams);
+            return response;
+        }
+
+        public static async Task<RootobjectCompositions[]> TheStations()
+        {
+
+            DateTime tänään = DateTime.Now;
+
+            // Valitaan https://rata.digitraffic.fi/api/v1/compositions/ + Tämä päivä, esimerkiksi 2022-07-07.
+            // Täältä saadaan lähtö- ja pääteasemat sekä junan numero
+
+            string urlParams = "compositions/" + tänään.ToString("yyyy-MM-dd");
+            var response = await ApiHelper.RunAsync<RootobjectCompositions[]>(url, urlParams);
+            return response;
+        }
+
+        // Miikka    /\
+        //   S      /  \
+        //           |
+        // Speed     |    
 
     }
 
