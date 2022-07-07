@@ -28,15 +28,23 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             return response;
         }
 
-        public static async Task<LiveTrains[]> GetLiveTrains()
+        //Jutta&Antti
+        public static async Task<LiveTrains[]> GetLiveTrains(string depDate)
         {
-            string urlParams = "live-trains";
+            string urlParams = "trains/" + depDate;
 
             var response = await ApiHelper.RunAsync<LiveTrains[]>(url, urlParams);
             return response;
         }
 
+        //Jutta&Antti
+        public static async Task<CompositionsTrain[]> GetLocomotiveData(string depDate)
+        {
+            string urlParams = "compositions/" + depDate;
 
+            var response = await ApiHelper.RunAsync<CompositionsTrain[]>(url, urlParams);
+            return response;
+        }
 
         // Speed     |
         //           |
