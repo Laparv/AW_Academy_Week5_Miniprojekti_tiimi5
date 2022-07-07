@@ -53,11 +53,18 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         Console.Clear();
                         Console.WriteLine();
                         break;
-                    case '5':
+                    case '5': //Jutta&Antti
                         Console.Clear();
-                        LiveTrains[] LiveTrainsArray = await TrainApi.GetLiveTrains();
-                        LateTrains.TrainsArrivedLate(LiveTrainsArray);
-                        Console.WriteLine("\npress any key to exit");
+
+                        Console.WriteLine("Anna päivämäärä, josta haluat tarkastella myöhästyneitä junia ja niiden veturityyppejä (YYYY,MM,DD)");
+                        string depDate = Convert.ToDateTime(Console.ReadLine()).ToString("yyyy-MM-dd");
+
+                        LiveTrains[] LiveTrainsArray = await TrainApi.GetLiveTrains(depDate);
+                        CompositionsTrain[] CompositionsArray = await TrainApi.GetLocomotiveData(depDate);
+
+                        LateTrains.TrainsArrivedLate(LiveTrainsArray, CompositionsArray);
+
+                        Console.WriteLine("\n\nPaina mitä tahansa jatkaaksesi");
                         Console.ReadKey();
                         break;
                     case '6':
@@ -213,8 +220,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             var stationName = stationList.Where(station => station.stationShortCode.Equals(stationCode)).FirstOrDefault();
             return stationName.stationName;
         }
-
-        static void Otsikko() //MS
+        static void Otsikko()
         {
             Console.WriteLine(@"             __                              
             / /_  ______  ____ _             
@@ -228,7 +234,8 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                                        ");
         }
     }
-    }
+        // MS
+}
 
 
 //asemien listaukseen koodi - Lasse
