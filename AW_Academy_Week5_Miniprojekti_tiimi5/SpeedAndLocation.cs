@@ -16,39 +16,43 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
             SpeedRootobject[] stationNumber = await TrainApi.GetSpeedStationNumber();
 
-            Timetablerow[] stationName = await TrainApi.GetSpeedStationName();
 
             RootobjectCompositions[] theStations = await TrainApi.TheStations();
 
+            Station[] Stationnames = await TrainApi.GetStations();
 
 
+
+            //foreach (var asdlol in Stationnames)
+            //{
+            //    Console.WriteLine($"{asdlol.stationName}. {asdlol.stationShortCode}");
+            //}
 
             var filtteriä = getSpeed.Where(train => train.speed > 0);
-            //var order = filtteriä.OrderByDescending(x => x.speed);
+            var order = filtteriä.OrderByDescending(x => x.speed);
 
-            foreach (var trying in filtteriä)
+            var i = 1;
+
+            foreach (var trying in order)
             {
-                var testailua = stationNumber.Where(x => x.trainNumber == trying.trainNumber);
 
-                //var järjestys = filtteriä.OrderBy(y => y.speed);
-
-
-
-                foreach (var testingAgain in testailua)
+                if (i <= 5)
                 {
-                    Console.WriteLine($"Lähtöasema: {theStations[0].journeySections[0].beginTimeTableRow.stationShortCode}");
-                    Console.WriteLine($"Pääteasema: {theStations[0].journeySections[0].endTimeTableRow.stationShortCode}");
-                    Console.WriteLine($"Nopeus: {trying.speed} Km/h\n");
+                    var testailua2 = theStations
+                        .Where(x => x.trainNumber == trying.trainNumber);
 
 
-                    //Console.WriteLine($"{trying.trainNumber}. {testingAgain.timeTableRows[0].stationShortCode}. {trying.speed}");
+                    foreach (var testingAgain in testailua2)
+                    {
+                        Console.WriteLine($"Lähtöasema: {testingAgain.journeySections[0].beginTimeTableRow.stationShortCode} {Stationnames[0].stationName}");
+                        Console.WriteLine($"Pääteasema: {testingAgain.journeySections[0].endTimeTableRow.stationShortCode}");
+                        Console.WriteLine($"Nopeus: {trying.speed} Km/h\n");
+
+                    }
                 }
+
+                i += 1;
             }
-
-
-
-
-
 
             //foreach (var newTest in theStations)
             //{
