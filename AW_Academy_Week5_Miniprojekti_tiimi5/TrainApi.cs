@@ -18,6 +18,24 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             var response = await ApiHelper.RunAsync<Station[]>(url, urlParams);
             return response;
         }
+        
+        //checks next 5 trains
+        public static async Task<LiveTrains[]> CheckForTrains(string departure_station, string arrival_station, string startDate)
+        {
+            string urlParams = $"live-trains/station/{departure_station}/{arrival_station}?include_nonstopping=false&limit=5&startDate={startDate}";
+
+            var response = await ApiHelper.RunAsync<LiveTrains[]>(url, urlParams);
+            return response;
+        }
+
+        public static async Task<LiveTrains[]> GetLiveTrains()
+        {
+            string urlParams = "live-trains";
+
+            var response = await ApiHelper.RunAsync<LiveTrains[]>(url, urlParams);
+            return response;
+        }
+
 
 
         // Speed     |
@@ -52,4 +70,5 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         // Speed     |    
 
     }
+
 }

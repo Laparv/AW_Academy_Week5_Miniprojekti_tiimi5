@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
@@ -76,6 +76,8 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public int thirdCategoryCodeId { get; set; }
     }
 
+    }
+
 
 
 
@@ -116,5 +118,6 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
     // Speed     |    
 
 }
+
 
 
