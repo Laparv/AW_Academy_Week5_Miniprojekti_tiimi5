@@ -15,7 +15,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             int lateAmount = lateTrains.Count();
             int allArrivedTrains = filter2.Count();
             int percentageLate = lateAmount / (allArrivedTrains / 100);
-            Console.WriteLine("Kaikki perille päässeet matkustajajunat 24h ajalta: " + allArrivedTrains);
+            Console.WriteLine("\nKaikki perille päässeet matkustajajunat 24h ajalta: " + allArrivedTrains);
             Console.WriteLine("Joista yli 3 min myöhässä oli " + percentageLate + "%");
             var lateLoco = LateLocomotive(lateTrains, compositions);
             LocomotiveLatePercent(filter2, lateLoco, compositions);

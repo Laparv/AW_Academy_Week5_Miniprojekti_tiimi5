@@ -64,7 +64,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
                         LateTrains.TrainsArrivedLate(LiveTrainsArray, CompositionsArray);
 
-                        Console.WriteLine("\n\npaina mitä tahansa jatkaaksesi");
+                        Console.WriteLine("\n\nPaina mitä tahansa jatkaaksesi");
                         Console.ReadKey();
                         break;
                     case '6':
