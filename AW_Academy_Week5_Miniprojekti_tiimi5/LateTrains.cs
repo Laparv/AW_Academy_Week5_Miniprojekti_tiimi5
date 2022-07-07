@@ -28,30 +28,47 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
             foreach (var train in filter2)
             {
-                int trainNum = train.trainNumber;
-
-                string allLocoString = compositions.Where(comp => comp.trainNumber == trainNum).First().journeySections[0].locomotives[0].locomotiveType;
-                if (!String.IsNullOrWhiteSpace(allLocoString))
-                    allLocoList.Add(allLocoString);
+                int? trainNum = train.trainNumber;
+                if (trainNum != null)
+                {
+                    var helpervar = compositions.Where(comp => comp.trainNumber == trainNum && (comp.trainCategory == "Commuter" || comp.trainCategory == "Long-distance"));
+                    if (helpervar.Any())
+                    {
+                        if (helpervar.First().journeySections.Any())
+                        {
+                            if (helpervar.First().journeySections.First().locomotives.Any())
+                            {
+                                if (helpervar.First().journeySections.First().locomotives.First().locomotiveType != null)
+                                {
+                                    string alllocoString = helpervar.First().journeySections.First().locomotives.First().locomotiveType;
+                                    if (!String.IsNullOrWhiteSpace(alllocoString))
+                                        allLocoList.Add(alllocoString);
+                                }
+                            }
+                        }
+                        
+                    }
+                }
             }
 
             List<string> lateTypes = locoLate.Distinct().ToList();
 
-            List<int> locoAmountLate = new List<int>();
+            List<double> locoAmountLate = new List<double>();
             foreach (var locoType in lateTypes)
                 locoAmountLate.Add(locoLate.Where(x => x == locoType).Count());
+            
 
-            List<int> locoAmountAll = new List<int>();
+            List<double> locoAmountAll = new List<double>();
             foreach (var locoType in lateTypes)
                 locoAmountAll.Add(allLocoList.Where(x => x == locoType).Count());
 
-            List<int> locoPercentage = new List<int>();
+            List<double> locoPercentage = new List<double>();
             for (int i = 0; i < locoAmountLate.Count; i++)
                 locoPercentage.Add(locoAmountLate[i] / (locoAmountAll[i] / 100)); // !pyöristyy nollaan pitää vaihtaa doubleksi!
 
             var wantedIndex = locoPercentage.IndexOf(locoPercentage.Max());
 
-            Console.WriteLine($"Most late trips were done with locomotivetype: {lateTypes[wantedIndex]}, {locoPercentage.Max()}% of trips were late with this locomotive.");
+            Console.WriteLine($"Useimmat myöhästyneet veturityypit olivat: {lateTypes[wantedIndex]}, {locoPercentage.Max()}% matkoista oli myöhässä tällä veturityypillä.");
         }
 
         public static List<string> LateLocomotive(IEnumerable<LiveTrains> lateTrains, CompositionsTrain[] compositions)
@@ -60,11 +77,30 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             
             foreach (var train in lateTrains)
             {
-                int trainNum = train.trainNumber;
 
-                string locoString = compositions.Where(comp => comp.trainNumber == trainNum).First().journeySections[0].locomotives[0].locomotiveType;
-                if (!String.IsNullOrWhiteSpace(locoString))
-                    lateLocoList.Add(locoString);
+                int? trainNum = train.trainNumber;
+                if (trainNum != null)
+                {
+                    var helpervar = compositions.Where(comp => comp.trainNumber == trainNum && (comp.trainCategory == "Commuter" || comp.trainCategory == "Long-distance"));
+                    if (helpervar.Any())
+                    {
+                        if (helpervar.First().journeySections.Any())
+                        {
+                            if (helpervar.First().journeySections.First().locomotives.Any())
+                            {
+                                if (helpervar.First().journeySections.First().locomotives.First().locomotiveType != null)
+                                {
+                                    
+                                    string latelocoString = helpervar.First().journeySections.First().locomotives.First().locomotiveType;
+                                    if (!String.IsNullOrWhiteSpace(latelocoString))
+                                        lateLocoList.Add(latelocoString);
+                                }
+                            }
+                        }
+                    }
+                }
+
+               
             }
 
             return lateLocoList;
