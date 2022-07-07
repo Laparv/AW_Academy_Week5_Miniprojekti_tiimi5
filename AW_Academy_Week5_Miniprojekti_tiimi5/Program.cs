@@ -30,15 +30,15 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
                         await GetNextTrainsInfo(); //Lasse
 
-                        Console.WriteLine("\npress any key to exit");
+                        Console.WriteLine("\n\nPaina mitä tahansa jatkaaksesi");
                         Console.ReadKey();
-                        Console.WriteLine();
 
                         break;
                     case '2':
                         Console.Clear();
                         SpeedAndLocation.Speed();
-                        Console.ReadLine();
+                        Console.WriteLine("\n\nPaina mitä tahansa jatkaaksesi");
+                        Console.ReadKey();
 
                         break;
 
@@ -142,7 +142,6 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                                 $"klo {arrivalTime.ToShortTimeString()}");
                         }
                     }
-                    Console.ReadLine();
                     break;
                 case '2':
                     Console.Clear();
@@ -188,7 +187,6 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                             Console.WriteLine("Väärä syöte. Yritäthän uudelleen.");
                             continue;
                         }
-                        Console.ReadLine();
                         break;
                     }
                     break;
