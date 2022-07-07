@@ -14,8 +14,8 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             while (choice != '8')
             {
                 Console.Clear();
+                Otsikko();
                 Train();
-                Console.WriteLine("\nThe ultimate train app\n");
                 Menu();
 
                 choice = Console.ReadKey().KeyChar;
@@ -44,14 +44,15 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
                         break;
                     case '2':
+                        Console.Clear();
+                        Console.ReadLine();
 
-                        SpeedAndLocation.Speed();
-
-                        Console.WriteLine();
                         break;
                     case '3':
                         Console.Clear();
-                        Console.WriteLine();
+                        SpeedAndLocation.Speed();
+                        Console.ReadLine();
+
                         break;
                     case '4':
                         Console.Clear();
@@ -72,9 +73,9 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                     case '8':
                         Console.Clear();
                         break;
-                    default:    // Error message
+                    default:    // Virheviesti
                         Console.Clear();
-                        Console.WriteLine("Error. Press any key to choose another action.");
+                        Console.WriteLine("Virhe. Paina jotain muuta näppäintä");
                         Console.ReadKey();
                         break;
 
@@ -87,55 +88,49 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
         static void Menu()
         {
-            Console.WriteLine(@"┌────┬───────────────────────────────────┐
-│ 1  │ Aikatauluhaku aseman perusteella  │
-├────┼───────────────────────────────────┤
-│ 2  │ Print Ids And Titles              │
-├────┼───────────────────────────────────┤
-│ 3  │ Ratatyötilanne tietyllä välillä   │
-├────┼───────────────────────────────────┤
-│ 4  │ Maksiminopeus tietyllä välillä    │
-├────┼───────────────────────────────────┤
-│ 5  │ Junien myöhästymisprosentti       │
-├────┼───────────────────────────────────┤
-│ 6  │ Myöhästeleekö veturityyppi        │
-├────┼───────────────────────────────────┤
-│ 7  │ Jotain muuta?                     │
-├────┼───────────────────────────────────┤
-│ 8  │ Exit                              │
-└────┴───────────────────────────────────┘
+            Console.WriteLine(@"    ┌────┬───────────────────────────────────┐
+    │ 1  │ Aikatauluhaku aseman perusteella  │
+    ├────┼───────────────────────────────────┤
+    │ 2  │                                   │
+    ├────┼───────────────────────────────────┤
+    │ 3  │ Viisi nopeinta junaa juuri nyt    │
+    ├────┼───────────────────────────────────┤
+    │ 4  │ Maksiminopeus tietyllä välillä    │
+    ├────┼───────────────────────────────────┤
+    │ 5  │ Junien myöhästymisprosentti       │
+    ├────┼───────────────────────────────────┤
+    │ 6  │ Myöhästeleekö veturityyppi        │
+    ├────┼───────────────────────────────────┤
+    │ 7  │ Jotain muuta?                     │
+    ├────┼───────────────────────────────────┤
+    │ 8  │ Exit                              │
+    └────┴───────────────────────────────────┘
 ");
         }
 
+        // MS
         static void Train()
         {
-            Console.WriteLine(@"____
-|DD|____T_
-|_ |_____|<
-  @-@-@-oo\");
+            Console.WriteLine(@"                    ____
+                    |DD|____T_
+                    |_ |_____|<
+                    @-@-@-oo\");
         }
 
-        //private static async Task GetStationInfo()
-        //{
-        //    //List<Station> stationList = await TrainApi.GetStations();
 
-        //    if (stationList == null)
-        //        Console.WriteLine("\n  Station not found :(");
-        //    else
-        //    {
-        //        foreach (var station in stationList)
-        //        {
-        //            Console.WriteLine(station.stationName);
-        //        }
-        //    }
-        //    //if (fruit == null)
-        //    //    Console.WriteLine("\n  Fruit not found :(");
-        //    //else
-        //    //    PrintFruitData(fruit);
-        //}
-
-
+        // MS
+        static void Otsikko()
+        {
+            Console.WriteLine(@"             __                              
+            / /_  ______  ____ _             
+       __  / / / / / __ \/ __ `/  ______     
+      / /_/ / /_/ / / / / /_/ /  /_____/     
+      \____/\__,_/_/ /_/\__,_/ ____          
+        / ___/____ _   _____  / / /_  _______
+        \__ \/ __ \ | / / _ \/ / / / / / ___/
+       ___/ / /_/ / |/ /  __/ / / /_/ (__  ) 
+      /____/\____/|___/\___/_/_/\__,_/____/  
+                                       ");
+        }
     }
-
-
 }

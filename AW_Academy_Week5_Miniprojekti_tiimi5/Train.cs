@@ -7,17 +7,6 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public Station[] Property1 { get; set; }
     }
 
-    public class SpeedList
-    {
-
-        public SpeedAndStuff[] Property2 { get; set; }
-        public SpeedRootobject[] Property3 { get; set; }
-        public Timetablerow[] Property4 { get; set; }
-
-    }
-
-
-
     public class Station
     {
         public bool passengerTraffic { get; set; }
@@ -90,89 +79,19 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
 
 
-
-
-
-    // Speediä
+    // Speed     |
+    //           |
+    // Miikka  \  /
+    //   S      \/
     public class SpeedAndStuff
     {
         public int trainNumber { get; set; }
-        public string departureDate { get; set; }
-        public DateTime timestamp { get; set; }
-        public Location location { get; set; }
         public int speed { get; set; }
     }
-
-    public class Location
-    {
-        public string type { get; set; }
-        public float[] coordinates { get; set; }
-    }
-
-
-    public class SpeedRootobject
-    {
-        public int trainNumber { get; set; }
-        public string departureDate { get; set; }
-        public int operatorUICCode { get; set; }
-        public string operatorShortCode { get; set; }
-        public string trainType { get; set; }
-        public string trainCategory { get; set; }
-        public string commuterLineID { get; set; }
-        public bool runningCurrently { get; set; }
-        public bool cancelled { get; set; }
-        public long version { get; set; }
-        public string timetableType { get; set; }
-        public DateTime timetableAcceptanceDate { get; set; }
-        public Timetablerow[] timeTableRows { get; set; }
-    }
-
-    public class Timetablerow
-    {
-        public string stationShortCode { get; set; }
-        public int stationUICCode { get; set; }
-        public string countryCode { get; set; }
-        public string type { get; set; }
-        public bool trainStopping { get; set; }
-        public bool commercialStop { get; set; }
-        public string commercialTrack { get; set; }
-        public bool cancelled { get; set; }
-        public DateTime scheduledTime { get; set; }
-        public DateTime actualTime { get; set; }
-        public int differenceInMinutes { get; set; }
-        public Caus[] causes { get; set; }
-        public Trainready trainReady { get; set; }
-        public DateTime liveEstimateTime { get; set; }
-        public string estimateSource { get; set; }
-    }
-
-    public class Trainready
-    {
-        public string source { get; set; }
-        public bool accepted { get; set; }
-        public DateTime timestamp { get; set; }
-    }
-
-    public class Caus
-    {
-        public string categoryCode { get; set; }
-        public string detailedCategoryCode { get; set; }
-        public string thirdCategoryCode { get; set; }
-        public int categoryCodeId { get; set; }
-        public int detailedCategoryCodeId { get; set; }
-        public int thirdCategoryCodeId { get; set; }
-    }
-
 
     public class RootobjectCompositions
     {
         public int trainNumber { get; set; }
-        public string departureDate { get; set; }
-        public int operatorUICCode { get; set; }
-        public string operatorShortCode { get; set; }
-        public string trainCategory { get; set; }
-        public string trainType { get; set; }
-        public long version { get; set; }
         public Journeysection[] journeySections { get; set; }
     }
 
@@ -180,51 +99,21 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
     {
         public Begintimetablerow beginTimeTableRow { get; set; }
         public Endtimetablerow endTimeTableRow { get; set; }
-        public Locomotive[] locomotives { get; set; }
-        public Wagon[] wagons { get; set; }
-        public int totalLength { get; set; }
-        public int maximumSpeed { get; set; }
-        public int attapId { get; set; }
-        public int saapAttapId { get; set; }
     }
 
     public class Begintimetablerow
     {
         public string stationShortCode { get; set; }
-        public int stationUICCode { get; set; }
-        public string countryCode { get; set; }
-        public string type { get; set; }
-        public DateTime scheduledTime { get; set; }
     }
 
     public class Endtimetablerow
     {
         public string stationShortCode { get; set; }
-        public int stationUICCode { get; set; }
-        public string countryCode { get; set; }
-        public string type { get; set; }
-        public DateTime scheduledTime { get; set; }
     }
-
-    public class Locomotive
-    {
-        public int location { get; set; }
-        public string locomotiveType { get; set; }
-        public string powerType { get; set; }
-    }
-
-    public class Wagon
-    {
-        public string wagonType { get; set; }
-        public int location { get; set; }
-        public int salesNumber { get; set; }
-        public int length { get; set; }
-        public bool disabled { get; set; }
-        public bool catering { get; set; }
-        public bool pet { get; set; }
-    }
-
-
+    // Miikka    /\
+    //   S      /  \
+    //           |
+    // Speed     |    
 
 }
 
