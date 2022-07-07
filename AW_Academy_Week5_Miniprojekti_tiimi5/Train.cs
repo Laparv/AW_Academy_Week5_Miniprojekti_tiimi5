@@ -18,6 +18,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public float latitude { get; set; }
     }
 
+    //Jutta&Antti
     //Junien myöhästely
     public class LiveTrains
     {
@@ -35,7 +36,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public DateTime timetableAcceptanceDate { get; set; }
         public LiveTimetablerow[] timeTableRows { get; set; }
     }
-
+    //Jutta&Antti
     //Junien myöhästely
     public class LiveTimetablerow
     {
@@ -55,7 +56,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public DateTime liveEstimateTime { get; set; }
         public string estimateSource { get; set; }
     }
-
+    //Jutta&Antti
     //Junien myöhästely (turha)
     public class LiveTrainready
     {
@@ -63,7 +64,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public bool accepted { get; set; }
         public DateTime timestamp { get; set; }
     }
-
+    //Jutta&Antti
     //Junien myöhästely (turha)
     public class LiveCaus
     {
@@ -75,7 +76,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public int thirdCategoryCodeId { get; set; }
     }
 
-
+    //Jutta&Antti
     public class CompositionsTrain
     {
         public int trainNumber { get; set; }
@@ -87,7 +88,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public long version { get; set; }
         public CompositionsJourneysection[] journeySections { get; set; }
     }
-
+    //Jutta&Antti
     public class CompositionsJourneysection
     {
         public CompositionsBegintimetablerow beginTimeTableRow { get; set; }
@@ -99,7 +100,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public int attapId { get; set; }
         public int saapAttapId { get; set; }
     }
-
+    //Jutta&Antti
     public class CompositionsBegintimetablerow
     {
         public string stationShortCode { get; set; }
@@ -108,7 +109,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public string type { get; set; }
         public DateTime scheduledTime { get; set; }
     }
-
+    //Jutta&Antti
     public class CompositionsEndtimetablerow
     {
         public string stationShortCode { get; set; }
@@ -117,14 +118,14 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         public string type { get; set; }
         public DateTime scheduledTime { get; set; }
     }
-
+    //Jutta&Antti
     public class CompositionsLocomotive
     {
         public int location { get; set; }
         public string locomotiveType { get; set; }
         public string powerType { get; set; }
     }
-
+    //Jutta&Antti
     public class CompositionsWagon
     {
         public string wagonType { get; set; }

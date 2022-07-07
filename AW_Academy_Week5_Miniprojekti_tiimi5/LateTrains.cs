@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace AW_Academy_Week5_Miniprojekti_tiimi5
 {
+    //Jutta&Antti
     public class LateTrains
     {
         public static IEnumerable<LiveTrains> TrainsArrivedLate (LiveTrains[] liveArray, CompositionsTrain[] compositions) //valikoidaan ne matkustajajunat jotka perillä, antaa niiden määrän ja tulostaa 24h sisällä myöhästyneiden prosentin
@@ -28,30 +29,58 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
             foreach (var train in filter2)
             {
-                int trainNum = train.trainNumber;
-                
-                string allLocoString = compositions.Where(comp => comp.trainNumber == trainNum).First().journeySections[0].locomotives[0].locomotiveType;
-                if (!String.IsNullOrWhiteSpace(allLocoString))
-                    allLocoList.Add(allLocoString);
+                int? trainNum = train.trainNumber;
+                if (trainNum != null)
+                {
+                    var helpervar = compositions.Where(comp => comp.trainNumber == trainNum && (comp.trainCategory == "Commuter" || comp.trainCategory == "Long-distance"));
+                    if (helpervar.Any())
+                    {
+                        if (helpervar.First().journeySections.Any())
+                        {
+                            if (helpervar.First().journeySections.First().locomotives.Any())
+                            {
+                                if (helpervar.First().journeySections.First().locomotives.First().locomotiveType != null)
+                                {
+                                    string alllocoString = helpervar.First().journeySections.First().locomotives.First().locomotiveType;
+                                    if (!String.IsNullOrWhiteSpace(alllocoString))
+                                        allLocoList.Add(alllocoString);
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             List<string> lateTypes = locoLate.Distinct().ToList();
 
-            List<int> locoAmountLate = new List<int>();
+            List<double> locoAmountLate = new List<double>();
             foreach (var locoType in lateTypes)
                 locoAmountLate.Add(locoLate.Where(x => x == locoType).Count());
+            
 
-            List<int> locoAmountAll = new List<int>();
+            List<double> locoAmountAll = new List<double>();
             foreach (var locoType in lateTypes)
                 locoAmountAll.Add(allLocoList.Where(x => x == locoType).Count());
 
-            List<int> locoPercentage = new List<int>();
+            List<double> locoPercentage = new List<double>();
             for (int i = 0; i < locoAmountLate.Count; i++)
-                locoPercentage.Add(locoAmountLate[i] / (locoAmountAll[i] / 100)); // !pyöristyy nollaan pitää vaihtaa doubleksi!
+                locoPercentage.Add(locoAmountLate[i] / (locoAmountAll[i] / 100));
 
-            var wantedIndex = locoPercentage.IndexOf(locoPercentage.Max());
+            List<LocomotiveInfo> listOfLoco = new List<LocomotiveInfo>();
+            for (int i = 0; i < lateTypes.Count; i++)
+            {
+                listOfLoco.Add(new LocomotiveInfo
+                {
+                    LocoType = lateTypes[i], AmountAll = locoAmountAll[i], AmountLate = locoAmountLate[i],
+                    Percentage = locoPercentage[i]
+                });
+            }
 
-            Console.WriteLine($"Most late trips were done with locomotivetype: {lateTypes[wantedIndex]}, {locoPercentage.Max()}% of trips were late with this locomotive.");
+            double largestPersentage = listOfLoco.Where(x => x.AmountAll > 2).Select(y => y.Percentage).Max();
+
+            string largestLoco = listOfLoco.Where(x => x.AmountAll > 2 && x.Percentage == largestPersentage).Single().LocoType;
+
+            Console.WriteLine($"\nUseimmin myöhästynyt veturityypi (jolla ajettiin vähintään 3 kertaa) oli: {largestLoco}\n{largestPersentage}% matkoista oli myöhässä tällä veturityypillä.");
         }
 
         public static List<string> LateLocomotive(IEnumerable<LiveTrains> lateTrains, CompositionsTrain[] compositions)
@@ -60,26 +89,38 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             
             foreach (var train in lateTrains)
             {
-                int trainNum = train.trainNumber;
 
-                string locoString = compositions.Where(comp => comp.trainNumber == trainNum).First().journeySections[0].locomotives[0].locomotiveType;
-                if (!String.IsNullOrWhiteSpace(locoString))
-                    lateLocoList.Add(locoString);
+                int? trainNum = train.trainNumber;
+                if (trainNum != null)
+                {
+                    var helpervar = compositions.Where(comp => comp.trainNumber == trainNum && (comp.trainCategory == "Commuter" || comp.trainCategory == "Long-distance"));
+                    if (helpervar.Any())
+                    {
+                        if (helpervar.First().journeySections.Any())
+                        {
+                            if (helpervar.First().journeySections.First().locomotives.Any())
+                            {
+                                if (helpervar.First().journeySections.First().locomotives.First().locomotiveType != null)
+                                {
+                                    
+                                    string latelocoString = helpervar.First().journeySections.First().locomotives.First().locomotiveType;
+                                    if (!String.IsNullOrWhiteSpace(latelocoString))
+                                        lateLocoList.Add(latelocoString);
+                                }
+                            }
+                        }
+                    }
+                }
             }
-
             return lateLocoList;
-
-            //foreach (var locoType in locoInfoList)
-            //    Console.WriteLine(locoType);
-
-
-
-            // jotta voidaan verrata mikä veturityyppi myöhästeli suhteellisesti eniten pitää hakea kuinka monta lähtöä kyseisellä veturilla tehtiin nyt tehdyn metodin lisäksi
-            // kun verrataan montako lähtöä veturilla tehtiin ja montako verutin lähtöä myöhästyi saadaan jokaiselle veturille myöhästymisprosentti
-
-
-            //var test = compositions.Join(lateTrains, comp => comp, train => train,
-            //    (comp, train) => new { TrainNum = train.trainNumber, LocoType = comp.journeySections[0].locomotives[0].locomotiveType });
         }
+    }
+    //Jutta&Antti
+    public class LocomotiveInfo
+    {
+        public string LocoType { get; set; }
+        public double AmountLate { get; set; }
+        public double AmountAll { get; set; }
+        public double Percentage { get; set; }
     }
 }

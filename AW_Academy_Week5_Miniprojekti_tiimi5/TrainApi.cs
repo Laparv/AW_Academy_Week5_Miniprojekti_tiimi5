@@ -28,6 +28,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             return response;
         }
 
+        //Jutta&Antti
         public static async Task<LiveTrains[]> GetLiveTrains(string depDate)
         {
             string urlParams = "trains/" + depDate;
@@ -36,6 +37,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             return response;
         }
 
+        //Jutta&Antti
         public static async Task<CompositionsTrain[]> GetLocomotiveData(string depDate)
         {
             string urlParams = "compositions/" + depDate;

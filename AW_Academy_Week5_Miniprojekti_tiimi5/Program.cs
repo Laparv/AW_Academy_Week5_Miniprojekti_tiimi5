@@ -50,10 +50,10 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         Console.Clear();
                         Console.WriteLine();
                         break;
-                    case '5':
+                    case '5': //Jutta&Antti
                         Console.Clear();
 
-                        Console.WriteLine("Give date to look for delayed trains and locomotives (YYYY,MM,DD)");
+                        Console.WriteLine("Anna päivämäärä, josta haluat tarkastella myöhästyneitä junia ja niiden veturityyppejä (YYYY,MM,DD)");
                         string depDate = Convert.ToDateTime(Console.ReadLine()).ToString("yyyy-MM-dd");
 
                         LiveTrains[] LiveTrainsArray = await TrainApi.GetLiveTrains(depDate);
@@ -61,9 +61,8 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
                         LateTrains.TrainsArrivedLate(LiveTrainsArray, CompositionsArray);
 
-                        Console.WriteLine("\npress any key to exit");
+                        Console.WriteLine("\n\npaina mitä tahansa jatkaaksesi");
                         Console.ReadKey();
-
                         break;
                     case '6':
                         Console.Clear();
