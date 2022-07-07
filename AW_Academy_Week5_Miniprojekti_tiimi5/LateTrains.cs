@@ -29,7 +29,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             foreach (var train in filter2)
             {
                 int trainNum = train.trainNumber;
-
+                
                 string allLocoString = compositions.Where(comp => comp.trainNumber == trainNum).First().journeySections[0].locomotives[0].locomotiveType;
                 if (!String.IsNullOrWhiteSpace(allLocoString))
                     allLocoList.Add(allLocoString);
