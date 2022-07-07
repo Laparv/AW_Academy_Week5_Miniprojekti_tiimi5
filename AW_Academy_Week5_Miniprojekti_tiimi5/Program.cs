@@ -132,23 +132,54 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         private static async Task GetNextTrainsInfo()
         {
             Console.Write("Where are you leaving from?: ");
-
             string departureFrom = await GetStationCode();
             Console.Write("Where do you want to go?: ");
             string arriveTo = await GetStationCode();
-            string timeNow = DateTime.Now.AddHours(-3).ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'");
 
-            LiveTrains[] nextTrains = await TrainApi.CheckForTrains(departureFrom, arriveTo, timeNow);
-            
-            
-            foreach (LiveTrains train in nextTrains)
+            Console.WriteLine("1) Leave now. 2) Specify departure time");
+            char choice = Console.ReadKey().KeyChar;
+            switch (choice)
             {
-                var departureTime = train.timeTableRows
-                    .Where(t => t.stationShortCode == departureFrom && t.type == "DEPARTURE")
-                    .Select(s => s.scheduledTime.AddHours(3)).FirstOrDefault();
+                case '1':
+                    string timeNow = DateTime.Now.AddHours(-3).ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'");
 
-               Console.WriteLine($"Train {train.trainType + train.trainNumber} leaves at {departureTime}.");
+                    LiveTrains[] nextTrains = await TrainApi.CheckForTrains(departureFrom, arriveTo, timeNow);
+
+
+                    foreach (LiveTrains train in nextTrains)
+                    {
+                        var departureTime = train.timeTableRows
+                            .Where(t => t.stationShortCode == departureFrom && t.type == "DEPARTURE")
+                            .Select(s => s.scheduledTime.AddHours(3)).FirstOrDefault();
+
+                        Console.WriteLine($"The next five trains:\n{train.trainType + train.trainNumber} leaves at {departureTime.ToShortTimeString()}. {train.commuterLineID}");
+                    }
+                    Console.ReadLine();
+                    break;
+                case '2':
+                    Console.WriteLine("What date are you leaving? (d/m/yyyy): ");
+                    var departureDate = Convert.ToDateTime(Console.ReadLine()).ToString("yyyy-MM-dd'T'");
+                    Console.WriteLine("What time?(hh:mm):");
+                    string departureHourAndMinute = Convert.ToDateTime(Console.ReadLine()).AddHours(-3).ToString("HH':'mm':'ss.fff'Z'");
+                    string timeFuture = departureDate + departureHourAndMinute;
+
+
+                    LiveTrains[] futureTrains = await TrainApi.CheckForTrains(departureFrom, arriveTo, timeFuture);
+
+
+                    foreach (LiveTrains train in futureTrains)
+                    {
+                        var futureDepartureTime = train.timeTableRows
+                            .Where(t => t.stationShortCode == departureFrom && t.type == "DEPARTURE")
+                            .Select(s => s.scheduledTime.AddHours(3)).FirstOrDefault();
+
+                        Console.WriteLine($"The next five trains:\n{train.trainType + train.trainNumber} leaves at {futureDepartureTime.ToShortTimeString()} {train.commuterLineID}");
+                    }
+                    Console.ReadLine();
+                    break;
+                default: break;
             }
+            
             
         }
 
