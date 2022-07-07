@@ -12,7 +12,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         {
             char choice = '0';
 
-            while (choice != '8')
+            while (choice != '4')
             {
                 Console.Clear();
                 Otsikko();
@@ -37,23 +37,12 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         break;
                     case '2':
                         Console.Clear();
-                        Console.ReadLine();
-                        Console.WriteLine("\npress any key to exit");
-                        Console.ReadKey();
-                      
-                        Console.WriteLine();
-                        break;
-                    case '3':
-                        Console.Clear();
                         SpeedAndLocation.Speed();
                         Console.ReadLine();
 
                         break;
-                    case '4':
-                        Console.Clear();
-                        Console.WriteLine();
-                        break;
-                    case '5': //Jutta&Antti
+
+                    case '3': //Jutta&Antti
                         Console.Clear();
 
                         Console.WriteLine("Anna päivämäärä, josta haluat tarkastella myöhästyneitä junia ja niiden veturityyppejä (YYYY,MM,DD)");
@@ -67,15 +56,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         Console.WriteLine("\n\nPaina mitä tahansa jatkaaksesi");
                         Console.ReadKey();
                         break;
-                    case '6':
-                        Console.Clear();
-                        Console.WriteLine();
-                        break;
-                    case '7':
-                        Console.Clear();
-                        Console.WriteLine();
-                        break;
-                    case '8':
+                    case '4':
                         Console.Clear();
                         break;
                     default:    // Virheviesti
@@ -94,21 +75,13 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         static void Menu()
         {
             Console.WriteLine(@"    ┌────┬───────────────────────────────────┐
-    │ 1  │ Aikatauluhaku aseman perusteella  │
+    │ 1  │ Aikatauluhaku                     │
     ├────┼───────────────────────────────────┤
-    │ 2  │                                   │
+    │ 2  │ Viisi nopeinta junaa juuri nyt    │
     ├────┼───────────────────────────────────┤
-    │ 3  │ Viisi nopeinta junaa juuri nyt    │
+    │ 3  │ Junien/veturien myöhästely        │
     ├────┼───────────────────────────────────┤
-    │ 4  │ Maksiminopeus tietyllä välillä    │
-    ├────┼───────────────────────────────────┤
-    │ 5  │ Junien myöhästymisprosentti       │
-    ├────┼───────────────────────────────────┤
-    │ 6  │ Myöhästeleekö veturityyppi        │
-    ├────┼───────────────────────────────────┤
-    │ 7  │ Jotain muuta?                     │
-    ├────┼───────────────────────────────────┤
-    │ 8  │ Exit                              │
+    │ 4  │ Sulje sovellus                    │
     └────┴───────────────────────────────────┘
 ");
         }
@@ -277,14 +250,3 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
     }
         // MS
 }
-
-
-//asemien listaukseen koodi - Lasse
-/* Station[] stationlist = await TrainApi.GetStations();
-
-                        int i = 0;
-                        foreach (Station station in stationlist)
-                        {
-                            i++;
-                            Console.WriteLine($"{i}. {station.stationName}");
-                        }*/
