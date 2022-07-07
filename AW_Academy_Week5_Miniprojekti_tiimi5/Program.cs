@@ -52,10 +52,18 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         break;
                     case '5':
                         Console.Clear();
-                        LiveTrains[] LiveTrainsArray = await TrainApi.GetLiveTrains();
-                        LateTrains.TrainsArrivedLate(LiveTrainsArray);
+
+                        Console.WriteLine("Give date to look for delayed trains and locomotives (YYYY,MM,DD)");
+                        string depDate = Convert.ToDateTime(Console.ReadLine()).ToString("yyyy-MM-dd");
+
+                        LiveTrains[] LiveTrainsArray = await TrainApi.GetLiveTrains(depDate);
+                        CompositionsTrain[] CompositionsArray = await TrainApi.GetLocomotiveData(depDate);
+
+                        LateTrains.TrainsArrivedLate(LiveTrainsArray, CompositionsArray);
+
                         Console.WriteLine("\npress any key to exit");
                         Console.ReadKey();
+
                         break;
                     case '6':
                         Console.Clear();
@@ -92,9 +100,9 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 ├────┼───────────────────────────────────┤
 │ 4  │ Maksiminopeus tietyllä välillä    │
 ├────┼───────────────────────────────────┤
-│ 5  │ Junien myöhästymisprosentti       │
+│ 5  │ Junien/veturien myöhästely        │
 ├────┼───────────────────────────────────┤
-│ 6  │ Myöhästeleekö veturityyppi        │
+│ 6  │ -                                 │
 ├────┼───────────────────────────────────┤
 │ 7  │ Jotain muuta?                     │
 ├────┼───────────────────────────────────┤
