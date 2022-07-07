@@ -28,7 +28,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                     case '1':
                         Console.Clear();
 
-                        await GetScheduleInfo(); //Lasse
+                        await GetNextTrainsInfo(); //Lasse
 
                         Console.WriteLine("\npress any key to exit");
                         Console.ReadKey();
@@ -129,23 +129,25 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         //}
 
         // metodi seuraavien junien hakemiseen asemalta asemalle - Lasse
-        private static async Task GetScheduleInfo()
+        private static async Task GetNextTrainsInfo()
         {
-            Console.Write("Give departure station: ");
+            Console.Write("Where are you leaving from?: ");
 
             string departureFrom = await GetStationCode();
-            Console.Write("Where do you want to go? ");
+            Console.Write("Where do you want to go?: ");
             string arriveTo = await GetStationCode();
             string timeNow = DateTime.Now.AddHours(-3).ToString("yyyy-MM-dd'T'HH':'mm':'ss.fff'Z'");
 
-            LiveTrains[] nextTrains = await TrainApi.CheckSoonTrains(departureFrom, arriveTo, timeNow);
+            LiveTrains[] nextTrains = await TrainApi.CheckForTrains(departureFrom, arriveTo, timeNow);
             
             
             foreach (LiveTrains train in nextTrains)
             {
-                //yritys saada lähtöaika tulostumaan
-               // var departureTime = Convert.ToString(train.timeTableRows.Where(t => t.stationShortCode == departureFrom && t.type.ToString().ToUpper() == "DEPARTURE").Select(s => s.scheduledTime));
-                Console.WriteLine($"Train {train.trainNumber} leaves at departureTime");
+                var departureTime = train.timeTableRows
+                    .Where(t => t.stationShortCode == departureFrom && t.type == "DEPARTURE")
+                    .Select(s => s.scheduledTime.AddHours(3)).FirstOrDefault();
+
+               Console.WriteLine($"Train {train.trainType + train.trainNumber} leaves at {departureTime}.");
             }
             
         }
@@ -159,10 +161,12 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             return stationCode.stationShortCode;
         }
 
+        }
+
     }
 
 
-}
+
 //asemien listaukseen koodi - Lasse
 /* Station[] stationlist = await TrainApi.GetStations();
 
