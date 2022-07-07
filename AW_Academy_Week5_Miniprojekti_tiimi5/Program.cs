@@ -213,9 +213,6 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             var stationName = stationList.Where(station => station.stationShortCode.Equals(stationCode)).FirstOrDefault();
             return stationName.stationName;
         }
-
-        }
-        // MS
         static void Otsikko()
         {
             Console.WriteLine(@"             __                              
@@ -230,8 +227,9 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                                        ");
         }
     }
-
+        // MS
 }
+
 
 //asemien listaukseen koodi - Lasse
 /* Station[] stationlist = await TrainApi.GetStations();
