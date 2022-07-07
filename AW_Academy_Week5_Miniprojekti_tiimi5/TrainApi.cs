@@ -44,5 +44,17 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
             var response = await ApiHelper.RunAsync<Timetablerow[]>(url, urlParams);
             return response;
         }
+
+        
+        public static async Task<RootobjectCompositions[]> TheStations()
+        {
+
+            DateTime tänään = DateTime.Now;
+
+            string urlParams = "compositions/2022-07-07"/* + tänään.ToString("yyyy-mm-dd")*/;
+
+            var response = await ApiHelper.RunAsync<RootobjectCompositions[]>(url, urlParams);
+            return response;
+        }
     }
 }

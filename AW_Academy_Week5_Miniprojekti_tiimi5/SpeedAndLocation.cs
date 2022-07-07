@@ -18,67 +18,68 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
 
             Timetablerow[] stationName = await TrainApi.GetSpeedStationName();
 
+            RootobjectCompositions[] theStations = await TrainApi.TheStations();
+
 
 
 
             var filtteriä = getSpeed.Where(train => train.speed > 0);
+            //var order = filtteriä.OrderByDescending(x => x.speed);
 
-            foreach (var perkele in filtteriä)
+            foreach (var trying in filtteriä)
             {
-                Console.WriteLine($"{perkele.trainNumber}. {perkele.speed}");
+                var testailua = stationNumber.Where(x => x.trainNumber == trying.trainNumber);
+
+                //var järjestys = filtteriä.OrderBy(y => y.speed);
+
+
+
+                foreach (var testingAgain in testailua)
+                {
+                    Console.WriteLine($"Lähtöasema: {theStations[0].journeySections[0].beginTimeTableRow.stationShortCode}");
+                    Console.WriteLine($"Pääteasema: {theStations[0].journeySections[0].endTimeTableRow.stationShortCode}");
+                    Console.WriteLine($"Nopeus: {trying.speed} Km/h\n");
+
+
+                    //Console.WriteLine($"{trying.trainNumber}. {testingAgain.timeTableRows[0].stationShortCode}. {trying.speed}");
+                }
             }
 
-            foreach (var jaa in stationName)
-            {
-                Console.WriteLine($"{jaa.stationShortCode}");
-            }
-
-            foreach (var juu in stationNumber)
-            {
-                Console.WriteLine($"{juu.timeTableRows}");
-            }
-
-
-
-
-            
 
 
 
 
 
-            //Console.Clear();
-
-
-            //List<string> testList = new List<string>();
-
-            //foreach (SpeedAndStuff speed in speedlist)
+            //foreach (var newTest in theStations)
             //{
-            //    testList.Add("Train number: " + speed.trainNumber.ToString() + " Speed: " + speed.speed);
-
-            //    //Console.WriteLine($"{speed.trainNumber}. {speed.speed}");
+            //    Console.WriteLine($"Start: {newTest.journeySections[0].beginTimeTableRow.stationShortCode}");
+            //    Console.WriteLine($"End: {newTest.journeySections[0].endTimeTableRow.stationShortCode}");
             //}
 
-            //SpeedRootobject[] speedLocList = await TrainApi.GetSpeedStationNumber();
-
-            //foreach (SpeedRootobject loc in speedLocList)
+            //foreach (var test in theStations)
             //{
-            //    testList.Add(loc.trainType);
-            //    //Console.WriteLine($"{loc.timeTableRows}");
-            //}
-
-            //foreach (var test in testList)
-            //{
-            //    Console.WriteLine(test);
+            //    Console.WriteLine($"{test.operatorShortCode}");
             //}
 
 
-            //Timetablerow[] testing = await TrainApi.GetSpeedStationName();
 
-            //foreach (Timetablerow testi in testing)
+
+            //var newFilter = getSpeed.Where(x => x.speed > 0);
+
+            //foreach (var abc in newFilter)
             //{
-            //    Console.WriteLine($" Station name: {testi.stationShortCode}");
+            //    var asd = theStations.Where(x => x.trainNumber == abc.trainNumber);
+
+            //    foreach (var qwe in asd)
+            //    {
+            //        Console.WriteLine($"{abc.trainNumber}. {qwe.journeySections[0].beginTimeTableRow.stationShortCode}. " +
+            //                          $"{qwe.journeySections[0].endTimeTableRow.stationShortCode}. {abc.speed}");
+            //    }
             //}
+
+
+
+
 
 
 
