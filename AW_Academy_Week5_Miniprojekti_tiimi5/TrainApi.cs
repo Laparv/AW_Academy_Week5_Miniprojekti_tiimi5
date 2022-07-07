@@ -20,7 +20,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
         }
         
         //checks next 5 trains
-        public static async Task<LiveTrains[]> CheckSoonTrains(string departure_station, string arrival_station, string startDate)
+        public static async Task<LiveTrains[]> CheckForTrains(string departure_station, string arrival_station, string startDate)
         {
             string urlParams = $"live-trains/station/{departure_station}/{arrival_station}?include_nonstopping=false&limit=5&startDate={startDate}";
 
