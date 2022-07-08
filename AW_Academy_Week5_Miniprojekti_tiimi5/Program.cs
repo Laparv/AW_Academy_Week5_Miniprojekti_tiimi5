@@ -36,7 +36,7 @@ namespace AW_Academy_Week5_Miniprojekti_tiimi5
                         break;
                     case '2':
                         Console.Clear();
-                        SpeedAndLocation.Speed();
+                        await SpeedAndLocation.Speed();
                         Console.WriteLine("\n\nPaina mitä tahansa jatkaaksesi");
                         Console.ReadKey();
 
